@@ -10,11 +10,13 @@ require './MVC/Models/BaseModel.php';
 class App 
 {
     protected $controller="HomePageController";
-    protected $action="Show";
+    protected $action="show";
     protected $params=[];
+    protected $obj;
 
     function __construct(){
  
+  
         $arr = $this->UrlProcess();
 
         // Controller !empty($arr[0]) &&
@@ -23,7 +25,8 @@ class App
             unset($arr[0]);
         }
         require_once "./MVC/Controllers/". $this->controller .".php";
-        $this->controller = new $this->controller;
+        $this->obj = new $this->controller;
+        
 
         // Action
         if(isset($arr[1])){
@@ -35,8 +38,9 @@ class App
 
         // Params
         $this->params = $arr?array_values($arr):[];
-
-        call_user_func_array([$this->controller, $this->action], $this->params );
+        
+        call_user_func_array([$this->obj, $this->action], $this->params );
+        
 
     }
 

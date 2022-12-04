@@ -8,6 +8,7 @@
     transition: top ease 0.1s ;
     text-decoration: none;
     box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 20%);
+    margin: 15px 0;
 }
 .Product:hover
 {
@@ -34,7 +35,7 @@
 {
     
     background-color: var(--primary1-color);
-    height: calc(var(--height-product) - 115px);
+    height: calc(var(--height-product) - 130px);
     position: relative;
 }
 .product__top-img
@@ -137,6 +138,11 @@
 {
     text-align: center;
     margin: 15px 0 10px 0 ;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    height: 40px;
 }
 .product__bot-price
 {
@@ -163,7 +169,7 @@
 .product__bot-detail
 {
     margin-top: 5px;
-    height: 35px;
+    height: 25px;
     background-color: var(--primary2-color);
     display: flex;
     justify-content: space-evenly;

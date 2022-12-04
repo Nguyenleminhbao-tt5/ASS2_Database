@@ -5,13 +5,17 @@ class ProfileProductController extends BaseController
     private $profileProduct;
     public function __construct()
     {
-       // $this->loadModel('Homepage.php');
-       // $this->homepage= new Homepage();
+        $this->loadModel('ProfileProductModel.php');
+        $this->profileProduct= new ProfileProductModel();
       
     }
-    public function show()
+    public function show($id)
     {
-        $this->view($page='ProfileProduct');
+
+        
+        $detailProduct=$this->profileProduct->getFind('BookID',$id);
+        $data=['page'=>'ProfileProduct','detailProduct'=>$detailProduct];
+        $this->view($data);
     }
 
 }

@@ -3,8 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="./public/Library/fontawesome-free-6.1.1-web/css/all.min.css">
     
     <link rel='stylesheet' href="./public/Css/base.css">
@@ -13,6 +11,8 @@
     <link rel='stylesheet' href="./public/Css/HomePage.css">
     <link rel='stylesheet' href="./public/Css/Product.css">
     <link rel='stylesheet' href="./public/Css/ProfileProduct.css">
+    <link rel='stylesheet' href="./public/Css/Pay.css">
+    <link rel='stylesheet' href='./public/Css/CategoryProduct.css'>
 
     <style>
       #root {
@@ -25,7 +25,7 @@
     <div id="root">
         <header class="header">
             <div class="navbar1">
-                <span class="navbar1__logo">LOGO</span>
+                <a href='./index.php' class="navbar1__logo">LOGO</a>
                 <div class="navbar1__search">
                     <input type="" class="navbar1__search-text"
                     placeholder='Nhập từ khóa tìm kiếm'/>
@@ -39,7 +39,7 @@
                         <i class="navbar1__cart-icon fa-solid fa-cart-shopping"></i>
                         <a href="" class="navbar1__cart-link">Giỏ hàng</a>
                     </div>
-                    <a href="./Login" class="navbar1__login">Đăng nhập</a>
+                    <a href="./index.php?url=Login" class="navbar1__login">Đăng nhập</a>
                     <div class="navbar1__social">
                         <a href="" class="navbar1__social-item">
                             <i class="navbar1__social-icon_fb fa-brands fa-facebook"></i>
@@ -53,7 +53,7 @@
             <div class="navbar2">
                 <div class="navbar2__category">
                     <i class="navbar2__category-icon_first fa-solid fa-bars"></i>
-                    <div class="navbar2__category-text" href="">DANH MỤC SẢN PHẨM</div>
+                    <a class="navbar2__category-text" href="./index.php?url=CategoryProduct">DANH MỤC SẢN PHẨM</a>
                     <i class="navbar2__category-icon_second fa-solid fa-angle-down"></i>
                 </div>
                 <div class="navbar2__wrap">
@@ -73,7 +73,9 @@
         
         <!-- Page content -->
         <div class="content">
-            <?php require "./MVC/Views/Pages/$page.php"?>
+            <?php 
+            $page=$data['page'];
+            require "./MVC/Views/Pages/$page.php"?>
         </div>
         
         <footer class="footer">
@@ -148,4 +150,51 @@
             </footer>
     </div>
   </body>
+  <script>
+
+    // home page
+    let listCommercial=document.querySelectorAll('.commercial-img');
+   
+        let index1=0;
+        setInterval(()=>{
+            document.querySelector('.commercial-img.img--active').classList.remove('img--active');
+            listCommercial[index1].classList.add('img--active');
+
+            if(index1==3) index1=0;
+            else index1++;
+
+        },3000);
+    
+
+
+    // category product
+
+    let listCategory=document.querySelectorAll('.category__item');
+ 
+        listCategory.forEach((item,index)=>{
+            item.addEventListener('click',()=>{
+                document.querySelector('.category__item.category__item--active').classList.remove('category__item--active');
+                item.classList.add('category__item--active');
+            })
+        })
+    
+   
+    // profile product
+    let listImg=document.querySelectorAll('.img');
+    let index=0;
+    document.querySelector('.left-btn').addEventListener('click',()=>{
+        if(index==0) index=2;
+        else index--;
+
+        document.querySelector('.img.img--active').classList.remove('img--active');
+        listImg[index].classList.add('img--active');
+    });
+    document.querySelector('.right-btn').addEventListener('click',()=>{
+        if(index==2) index=0;
+        else index++;
+
+        document.querySelector('.img.img--active').classList.remove('img--active');
+        listImg[index].classList.add('img--active');
+    })
+  </script>
 </html>
